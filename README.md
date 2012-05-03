@@ -1,14 +1,14 @@
-![status](https://secure.travis-ci.org/wearefractal/APPNAME.png?branch=master)
+![status](https://secure.travis-ci.org/wearefractal/bson-ton.png?branch=master)
 
 ## Information
 
 <table>
 <tr> 
-<td>Package</td><td>APPNAME</td>
+<td>Package</td><td>bson-ton</td>
 </tr>
 <tr>
 <td>Description</td>
-<td>NOTHING HERE YET</td>
+<td>BSON/MongoDB types for ton</td>
 </tr>
 <tr>
 <td>Node Version</td>
@@ -19,12 +19,101 @@
 ## Usage
 
 ```coffee-script
-NOTHING HERE YET
+ton = require 'ton'
+require 'bson-ton'
+
+str = ton.stringify {bson doc}
+doc = ton.parse str
 ```
 
-## Examples
+## Comparison
 
-You can view more examples in the [example folder.](https://github.com/wearefractal/APPNAME/tree/master/examples)
+### Initial document
+
+```javascript
+{
+    _id: new ObjectID("4fa202c54cc3da640c000001"),
+    string: "test",
+    regex: /test/,
+    date: new Date('1/2/1978'),
+    int: 42,
+    float: 33.3333,
+    bool: true,
+    code: new Code('console.log(i);', {
+        i: 1
+    }),
+    long: Long.fromNumber(20),
+    binary: new Binary(new Buffer("test")),
+    minkey: new MinKey,
+    maxkey: new MaxKey,
+    double: new Double(100),
+    ref: new DBRef('space', new ObjectID("4fa202c54cc3da640c000002"), 'stuff'),
+    arr: [1, 2, 3]
+}
+```
+
+### ton.stringify
+
+All types and data preserved.
+
+```javascript
+{
+    "_id": new ObjectID("4fa202c54cc3da640c000001"),
+    "string": "test",
+    "regex": /test/,
+    "date": new Date("1978-01-02T07:00:00.000Z"),
+    "int": 42,
+    "float": 33.3333,
+    "bool": true,
+    "code": new Code("console.log(i);", {
+        "i": 1
+    }),
+    "long": new Long(20, 0),
+    "binary": new Binary(new Buffer("test"), "0"),
+    "minkey": new MinKey(),
+    "maxkey": new MaxKey(),
+    "double": new Double(100),
+    "ref": new DBRef("space", new ObjectID("4fa202c54cc3da640c000002"), "stuff"),
+    "arr": [1, 2, 3]
+}
+```
+
+### JSON.stringify
+
+All types and some data lost - you would have to reconstruct this manually.
+
+```javascript
+{
+    "_id": "4fa202c54cc3da640c000001",
+    "string": "test",
+    "regex": {},
+    "date": "1978-01-02T07:00:00.000Z",
+    "int": 42,
+    "float": 33.3333,
+    "bool": true,
+    "code": {
+        "scope": {
+            "i": 1
+        },
+        "code": "console.log(i);"
+    },
+    "long": "20",
+    "binary": "dGVzdA==",
+    "minkey": {
+        "_bsontype": "MinKey"
+    },
+    "maxkey": {
+        "_bsontype": "MaxKey"
+    },
+    "double": 100,
+    "ref": {
+        "$ref": "space",
+        "$id": "4fa202c54cc3da640c000002",
+        "$db": "stuff"
+    },
+    "arr": [1, 2, 3]
+}
+```
 
 ## LICENSE
 

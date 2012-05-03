@@ -1,14 +1,16 @@
 {
-   "name":"APPNAME",
-   "description":"Nothing here yet",
+   "name":"bson-ton",
+   "description":"BSON/MongoDB types for ton",
    "version":"0.0.1",
-   "homepage":"http://github.com/wearefractal/APPNAME",
-   "repository":"git://github.com/wearefractal/APPNAME.git",
+   "homepage":"http://github.com/wearefractal/bson-ton",
+   "repository":"git://github.com/wearefractal/bson-ton.git",
    "author":"Fractal <contact@wearefractal.com> (http://wearefractal.com/)",
    "main":"./index.js",
    
    "dependencies":{
-      "coffee-script":"*"
+      "coffee-script":"*",
+      "bson":"*",
+      "ton":"*"
    },
    "devDependencies":{
       "mocha":"*",
@@ -23,7 +25,7 @@
    "licenses":[
       {
          "type":"MIT",
-         "url":"http://github.com/wearefractal/APPNAME/raw/master/LICENSE"
+         "url":"http://github.com/wearefractal/bson-ton/raw/master/LICENSE"
       }
    ]
 }
