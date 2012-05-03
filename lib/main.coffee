@@ -19,4 +19,4 @@ ton.add "Long", (val) -> "new Long(#{val.low_}, #{val.high_})" if val instanceof
 ton.add "Double", (val) -> "new Double(#{val.value})" if val instanceof Double
 ton.add "MinKey", (val) -> "new MinKey()" if val instanceof MinKey
 ton.add "MaxKey", (val) -> "new MaxKey()" if val instanceof MaxKey
-module.exports = {}
+module.exports = ton
