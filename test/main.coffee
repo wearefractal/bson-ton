@@ -7,7 +7,6 @@ doc =
   _id: new ObjectID("4fa202c54cc3da640c000001")
   string: "test"
   regex: /test/
-  date: new Date('1/2/1978')
   int: 42
   float: 33.3333
   bool: true
@@ -25,7 +24,7 @@ describe 'bson-ton', ->
     it 'should work', (done) ->
       str = ton.stringify doc
       should.exist str
-      str.should.equal '{"_id":new ObjectID("4fa202c54cc3da640c000001"),"string":"test","regex":/test/,"date":new Date("1978-01-02T07:00:00.000Z"),"int":42,"float":33.3333,"bool":true,"code":new Code("console.log(i);", {"i":1}),"long":new Long(20, 0),"binary":new Binary(new Buffer("test"), "0"),"minkey":new MinKey(),"maxkey":new MaxKey(),"double":new Double(100),"ref":new DBRef("space", new ObjectID("4fa202c54cc3da640c000002"), "stuff"),"arr":[1,2,3]}'
+      str.should.equal '{"_id":new ObjectID("4fa202c54cc3da640c000001"),"string":"test","regex":/test/,"int":42,"float":33.3333,"bool":true,"code":new Code("console.log(i);", {"i":1}),"long":new Long(20, 0),"binary":new Binary(new Buffer("test"), "0"),"minkey":new MinKey(),"maxkey":new MaxKey(),"double":new Double(100),"ref":new DBRef("space", new ObjectID("4fa202c54cc3da640c000002"), "stuff"),"arr":[1,2,3]}'
       done()
 
   describe 'parse()', ->
